@@ -52,7 +52,7 @@ object LispEvaluator {
       	case Variable("if") => if(evalb(l(1),env)) eval(l(2),env) else eval(l(3),env)
       	case Variable("or") => if(evalb(l(1),env)) evalb(l(1),env) else evalb(l(2),env)
       	case Variable("and") => if(evalb(l(1),env)) evalb(l(2),env) else evalb(l(1),env)
-      	//case Variable("cond") => if(evalb(l(1),env)) eval(l(2),env) else eval(l(3),env)
+      	//case Variable("cond") => while 
       	
       	// Let / Set
       	case Variable("let") => {
@@ -71,9 +71,10 @@ object LispEvaluator {
         
       	// Import
       	case Variable("import") => {
-      	  val filename = "C:/Users/Heath/code/eclipse-4.3.1/Slisp/lib/std.lsp"
+      	  val lib = eval(l(1),env) match {case Variable(f) => f}
+      	  val filename = "C:/Users/Heath/code/eclipse-4.3.1/Slisp/lib/" + lib + ".lsp"
       	  LispInterpreter.load(filename)
-      	  "File " + filename + " successfully imported"
+      	  "Library " + lib + " successfully imported"
       	}
       	
       	// Defining Functions

@@ -11,10 +11,13 @@ object LispInterpreter {
           case "" => {}
           case "exit" => {}
           case _ => {
-        	var ast = LispParser.parse(input)
-            var result = LispEvaluator.eval(ast,env)
-            //print(pretty(result))
-            print(result)
+            var ast: List[Any] = null
+            var result: Any = ""
+            try {ast = LispParser.parse(input)} 
+            catch {case e: Exception => print("Unable to parse expression: " + input)}
+        	if (ast != null)
+        	  try {result = LispEvaluator.eval(ast,env); print(pretty(result))} 
+        	  catch {case e: Exception => print("Unable to evaluate expression: " + input)}
           }
         }
       }
@@ -41,6 +44,7 @@ object LispInterpreter {
         }
         return result + ")"
       }
+      case Value(v) => pretty(v)
       case _ => s.toString
     }
   }
