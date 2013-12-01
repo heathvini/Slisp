@@ -60,7 +60,7 @@ object EvaluatorTest {
 		
 		println("Testing std...")
 		
-		eval("(import)")
+		eval("(import 'std)")
 		assertResult(false,eval("(not t)"))
 		assertResult(true,eval("(not nil)"))
 		assertResult(true,eval("(consp (list 1 2 3))"))

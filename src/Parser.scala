@@ -20,7 +20,7 @@ object LispParser extends JavaTokenParsers {
     )
   def integer: Parser[Value] = wholeNumber ^^ (n => Value(n.toInt))
   def real: Parser[Value] = floatingPointNumber  ^^ (d => Value(d.toDouble))
-  def quote = "'"~>exp ^^ (e => Value(e))
+  def quote = """['`]""".r ~>exp ^^ (e => Value(e))
   def literal: Parser[Variable] = """[^() ]+""".r ^^ (t => Variable(t.toString))
   
 }

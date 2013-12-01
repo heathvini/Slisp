@@ -45,6 +45,7 @@ object LispInterpreter {
         return result + ")"
       }
       case Value(v) => pretty(v)
+      case Variable(v) => pretty(v)
       case _ => s.toString
     }
   }
