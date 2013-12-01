@@ -1,0 +1,1 @@
+java -cp %SCALA_HOME%/lib/scala-library.jar;./bin LispInterpreter
